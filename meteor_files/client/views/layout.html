@@ -1,0 +1,55 @@
+<template name="layout">
+    <div class="container-fluid">
+        <header>
+            <span id="site-title">Brindusa Manolache</span>
+            <nav>
+                {{> navTemplate}}
+            </nav>
+        </header>
+        {{> yield }}
+    </div>
+</template>
+
+<template name="navTemplate">
+    {{#if isExpanded}}
+        {{#each navLink}}
+            <a href="{{href}}">{{link_name}}</a>
+        {{/each}}
+    {{else}}
+        <div class="btn-group">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            Action <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">about</a></li>
+            <li><a href="#">work</a></li>
+            <li><a href="#">resume</a></li>
+            <li><a href="#">contact</a></li>
+          </ul>
+        </div>
+    {{/if}}
+</template>
+
+<template name="mainBody">
+        {{#each entryList}}
+            {{> entryTemplate}}
+        {{/each}}
+        <div class="entry">
+            <a href="{{pathFor 'newEntry'}}" id="add-entry">add an entry</a>
+        </div>
+</template>
+
+<template name="entryTemplate">
+    <div class="entry">
+        {{title}}
+        <br>
+        {{description}}
+    </div>
+</template>
+
+<template name="newEntry">
+    <h2>Make an Entry!</h2>
+    <input type="text" name="title" class="form-control" placeholder="entry title">
+    <input type="text" name="description" class="form-control" placeholder="description">
+    <button type="submit" class="btn btn-primary" id="submit-new">Submit</button>
+</template>
